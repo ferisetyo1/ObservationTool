@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">ObservationTool</string>
+    <string name="menu_rekam">Rekam</string>
+    <string name="menu_profil">Profil</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mulai">Mulai</string>
+    <string name="detail_rekaman_tittle">Masukan Data Rekaman</string>
+    <string name="detail_rekaman_subtittle">Masukan data rekaman yang dibutuhkan dalam form</string>
+    <string name="detail_rekaman_btn_lanjut">Lanjut</string>
+    <string name="detail_rekaman_label_judul">Judul Rekaman</string>
+    <string name="detail_rekaman_label_mapel">Mata Pelajaran</string>
+    <string name="detail_rekaman_label_lokasi">Lokasi Observasi</string>
+    <string name="detail_rekaman_label_tanggal">Tanggal Observasi</string>
+    <string name="detail_rekaman_hint_judul">Masukan judul dari observasi</string>
+    <string name="detail_rekaman_hint_lokasi">Masukan lokasi sekolah observasi</string>
+    <string name="detail_rekaman_hint_tanggal">Pilih tanggal</string>
+
+    <string-array name="list_matapelajaran">
+        <item>Pilih mata pelajaran</item>
+        <item>Matematika</item>
+        <item>Geografi</item>
+        <item>Biologi</item>
+    </string-array>
+
+    <string-array name="tipe_kegiatan">
+        <item>Siswa bertanya</item>
+        <item>Siswa menjawab</item>
+    </string-array>
+
+</resources>

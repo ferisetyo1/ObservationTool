@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="action"
+            type="feri.com.observationtool.detailrekaman.action.DetailRekamanAction" />
+
+        <variable
+            name="vm"
+            type="feri.com.observationtool.detailrekaman.viewmodel.DetailRekamanViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".detailrekaman.DetailRekamanActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            tools:ignore="MissingConstraints">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20sp">
+                <ImageButton
+                    android:id="@+id/imageButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{()->action.onClickBack()}"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="?attr/actionModeCloseDrawable" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|center_horizontal"
+                    android:text="Merekam Observasi"
+                    android:textColor="@color/colorSkyBlue1"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/Judul_halaman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_rekaman_tittle"
+            android:textColor="@color/colorSkyBlue1"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.250" />
+
+        <EditText
+            android:id="@+id/in_namapengajar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:ems="10"
+            android:text="@={vm.judul}"
+            android:hint="@string/detail_rekaman_hint_judul"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/sp_mapel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Judul_halaman"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <Spinner
+            android:id="@+id/sp_mapel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:entries="@array/list_matapelajaran"
+            android:selectedItemPosition="@={vm.mapel_position}"
+            app:layout_constraintBottom_toTopOf="@+id/in_instansi"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/in_namapengajar" />
+
+        <EditText
+            android:id="@+id/in_instansi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:ems="10"
+            android:text="@={vm.lokasi}"
+            android:hint="@string/detail_rekaman_hint_lokasi"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/in_jabatan"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sp_mapel" />
+
+        <EditText
+            android:id="@+id/in_jabatan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:drawableEnd="@drawable/ic_date_range_blue"
+            android:ems="10"
+            android:hint="@string/detail_rekaman_hint_tanggal"
+            android:inputType="date"
+            android:text="@={vm.tanggal}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/in_instansi" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_rekaman_label_judul"
+            android:textColor="@color/colorSkyBlue2"
+            app:layout_constraintBottom_toTopOf="@+id/in_namapengajar"
+            app:layout_constraintStart_toStartOf="@+id/in_namapengajar" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_rekaman_label_mapel"
+            android:textColor="@color/colorSkyBlue2"
+            app:layout_constraintBottom_toTopOf="@+id/sp_mapel"
+            app:layout_constraintStart_toStartOf="@+id/sp_mapel" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_rekaman_label_lokasi"
+            android:textColor="@color/colorSkyBlue2"
+            app:layout_constraintBottom_toTopOf="@+id/in_instansi"
+            app:layout_constraintStart_toStartOf="@+id/in_instansi" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_rekaman_label_tanggal"
+            android:textColor="@color/colorSkyBlue2"
+            app:layout_constraintBottom_toTopOf="@+id/in_jabatan"
+            app:layout_constraintStart_toStartOf="@+id/in_jabatan" />
+
+        <Button
+            android:id="@+id/btn_lanjut"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorSkyBlue1"
+            android:text="@string/detail_rekaman_btn_lanjut"
+            android:onClick="@{()->action.onClickLanjut()}"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_rekaman_subtittle"
+            android:textColor="@color/colorSkyBlue2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Judul_halaman" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

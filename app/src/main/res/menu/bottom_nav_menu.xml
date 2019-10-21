@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_rekam"
+        android:icon="@drawable/ic_mic_black"
+        android:title="@string/menu_rekam"/>
+
+    <item
+        android:id="@+id/nav_profil"
+        android:icon="@drawable/ic_person_black"
+        android:title="@string/menu_profil"/>
+</menu>
