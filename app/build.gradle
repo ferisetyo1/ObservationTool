@@ -55,10 +55,7 @@ dependencies {
     androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-alpha05'
     kapt "com.android.databinding:compiler:5.4.1"
     implementation "com.github.bumptech.glide:glide:$glideVersion"
-
-    def camerax_version = "1.0.0-alpha05"
-    implementation "androidx.camera:camera-core:${camerax_version}"
-    implementation "androidx.camera:camera-camera2:${camerax_version}"
 }

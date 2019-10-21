@@ -48,7 +48,7 @@ class MulaiRekamanActivity : AppCompatActivity(), View.OnClickListener {
         btn_record = findViewById(R.id.btn_record)
         btn_catatan = findViewById(R.id.catatan)
         val file = File(externalCacheDir,
-            "${System.currentTimeMillis()}.3gp")
+            "audio_${System.currentTimeMillis()}.3gp")
         fileName = file.absolutePath
         Log.d(LOG_TAG, fileName)
 

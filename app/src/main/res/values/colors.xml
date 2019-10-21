@@ -10,4 +10,8 @@
     <color name="colorSkyBlue4">#F1F9FF</color>
     <color name="colorWhite">#FFF</color>
 
+
+    <color name="icActive">#FFFFFFFF</color>
+    <color name="icFocused">#DDFFFFFF</color>
+    <color name="icPressed">#AAFFFFFF</color>
 </resources>
