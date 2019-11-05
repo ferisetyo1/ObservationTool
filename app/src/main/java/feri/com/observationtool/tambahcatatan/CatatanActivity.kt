@@ -14,11 +14,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import feri.com.observationtool.R
+import feri.com.observationtool.data.Catatan
+import feri.com.observationtool.util.ConvertTime
 import kotlinx.android.synthetic.main.activity_catatan.*
 import kotlinx.android.synthetic.main.dialog_video_foto.*
 import java.io.File
 import java.io.IOException
-import java.util.concurrent.TimeUnit
 
 
 private const val REQUEST_VIDEO_CAPTURE = 201
@@ -30,13 +31,28 @@ private var permissions: Array<String> = arrayOf(
 )
 
 class CatatanActivity : AppCompatActivity(), View.OnClickListener {
+
+    private var time_milis: Long? = 0
+    var currentpath: String = ""
+
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.btn_tambah -> {
-
+                var returnintent = Intent()
+                returnintent.putExtra(
+                    "data_catatan", Catatan(
+                        nama_catatan.text.toString().trim(),
+                        tipe_kegiatan.selectedItemPosition,
+                        deskripsi_catatan.text.toString().trim(),
+                        time_milis,
+                        this.currentpath
+                    )
+                )
+                setResult(Activity.RESULT_OK,returnintent)
+                finish()
             }
             R.id.btn_batal -> {
-
+                finish()
             }
             R.id.tambahFoto -> {
                 var dialog = Dialog(this)
@@ -88,13 +104,8 @@ class CatatanActivity : AppCompatActivity(), View.OnClickListener {
         ActivityCompat.requestPermissions(this, permissions, REQUEST_PERMISSION)
         var intent = intent
 
-        var millis = intent.getLongExtra("waktu", 0)
-        val hms = String.format(
-            "%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
-            TimeUnit.MILLISECONDS.toMinutes(millis) % TimeUnit.HOURS.toMinutes(1),
-            TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MINUTES.toSeconds(1)
-        )
-        waktu.text = hms
+        time_milis = intent.getLongExtra("waktu", 0)
+        waktu.text = ConvertTime().longtoDate(time_milis!!)
     }
 
     private fun dispatchTakePictureIntent() {
@@ -159,7 +170,6 @@ class CatatanActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    var currentpath: String = ""
     @Throws(IOException::class)
     private fun createFile(prefix: String, ext: String): File {
         // Create an image file name

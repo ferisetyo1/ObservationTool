@@ -19,6 +19,8 @@
     <string name="simpam_button_alt">Simpan</string>
     <string name="capture_button_alt">Capture</string>
     <string name="switch_camera_button_alt">Switch</string>
+    <string name="kelas_hint_nama_kelas">Masukkan nama kelas</string>
+    <string name="kelas_hint_nama_sekolah">Masukkan nama sekolah</string>
 
     <string-array name="list_matapelajaran">
         <item>Pilih mata pelajaran</item>

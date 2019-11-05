@@ -1,6 +1,7 @@
 package feri.com.observationtool.mulairekaman
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.MediaRecorder
@@ -9,30 +10,29 @@ import android.os.Handler
 import android.os.SystemClock
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.Chronometer
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import feri.com.observationtool.R
+import feri.com.observationtool.data.Catatan
 import feri.com.observationtool.tambahcatatan.CatatanActivity
+import kotlinx.android.synthetic.main.activity_mulai_rekaman.*
 import java.io.File
 import java.io.IOException
 
 private const val LOG_TAG = "AudioRecordTest"
 private const val REQUEST_RECORD_AUDIO_PERMISSION = 200
-private const val REQUEST_CODE_CATATAN=201
+private const val REQUEST_CODE_CATATAN = 201
 
 class MulaiRekamanActivity : AppCompatActivity(), View.OnClickListener {
 
-    private var chronometer: Chronometer? = null
     private var fileName: String = ""
-    private lateinit var btn_record: Button
-    private lateinit var btn_catatan: Button
     private var startRecording: Boolean? = true
     private var recorder: MediaRecorder? = null
-    private lateinit var runnable:Runnable
-    private lateinit var myhandler:Handler
+    private lateinit var runnable: Runnable
+    private lateinit var myhandler: Handler
+    private lateinit var list_catatan: ArrayList<Catatan>
 
     // Requesting permission to RECORD_AUDIO
     private var permissionToRecordAccepted = false
@@ -44,18 +44,20 @@ class MulaiRekamanActivity : AppCompatActivity(), View.OnClickListener {
 
         ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
 
-        chronometer = findViewById(R.id.chronometer)
-        btn_record = findViewById(R.id.btn_record)
-        btn_catatan = findViewById(R.id.catatan)
-        val file = File(externalCacheDir,
-            "audio_${System.currentTimeMillis()}.3gp")
+        val file = File(
+            externalCacheDir,
+            "audio_${System.currentTimeMillis()}.3gp"
+        )
         fileName = file.absolutePath
         Log.d(LOG_TAG, fileName)
 
-        btn_record.setOnClickListener(this)
-        btn_catatan.setOnClickListener(this)
+        list_catatan = ArrayList()
+        rv_catatan.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            adapter = item_catatan_rec_adapter(context, list_catatan)
+        }
 
-        myhandler= Handler()
+        myhandler = Handler()
     }
 
     override fun onClick(v: View?) {
@@ -67,20 +69,35 @@ class MulaiRekamanActivity : AppCompatActivity(), View.OnClickListener {
                         chronometer!!.base = SystemClock.elapsedRealtime()
                         chronometer!!.start()
                         btn_record.text = "berhenti"
+                        tbh_catatan.isEnabled=true
                     }
                     false -> {
                         chronometer!!.stop()
                         btn_record.text = "mulai"
+                        tbh_catatan.isEnabled=false
                     }
                 }
                 startRecording = !startRecording!!
             }
-            R.id.catatan -> {
-                var time=SystemClock.elapsedRealtime() - chronometer!!.base
-                var intent= Intent(this, CatatanActivity::class.java)
-                intent.putExtra("waktu",time)
-                startActivityForResult(intent,REQUEST_CODE_CATATAN)
+            R.id.tbh_catatan -> {
+                var time = SystemClock.elapsedRealtime() - chronometer!!.base
+                var intent = Intent(this, CatatanActivity::class.java)
+                intent.putExtra("waktu", time)
+                startActivityForResult(intent, REQUEST_CODE_CATATAN)
             }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode === REQUEST_CODE_CATATAN && resultCode === Activity.RESULT_OK) {
+            Log.d("catatan_new_data", data?.getSerializableExtra("data_catatan").toString())
+            val newCatatan = data?.getSerializableExtra("data_catatan") as Catatan
+            //list_catatan.add(newCatatan)
+            rv_catatan.apply {
+                (adapter as item_catatan_rec_adapter)?.addItem(newCatatan)
+            }
+            Log.d("size",list_catatan.size.toString())
         }
     }
 
@@ -96,18 +113,18 @@ class MulaiRekamanActivity : AppCompatActivity(), View.OnClickListener {
             false
         }
         if (!permissionToRecordAccepted) {
-            Toast.makeText(this,"permission required!!",Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "permission required!!", Toast.LENGTH_LONG).show()
             finish()
         }
     }
 
     private fun onRecord(start: Boolean) = if (start) {
-        runnable=object : Runnable{
+        runnable = object : Runnable {
             override fun run() {
                 startRecording()
             }
         }
-        myhandler.postDelayed(runnable,1000)
+        myhandler.postDelayed(runnable, 1000)
     } else {
         myhandler.removeCallbacks(runnable)
         stopRecording()

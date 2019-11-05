@@ -58,4 +58,12 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-alpha05'
     kapt "com.android.databinding:compiler:5.4.1"
     implementation "com.github.bumptech.glide:glide:$glideVersion"
+
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-scalars:$rootProject.retrofitVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxJava2AndroidVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.loggingInterceptorVersion"
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
 }

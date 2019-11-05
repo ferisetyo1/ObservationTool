@@ -41,4 +41,8 @@ ext{
     glideVersion = '4.10.0'
     rulesVersion= '1.2.0'
     legacy = '1.0.0'
+    loggingInterceptorVersion = "3.8.0"
+    okhttpVersion = "3.9.0"
+    rxJava2AndroidVersion = "2.0.1"
+    retrofitVersion = "2.3.0"
 }

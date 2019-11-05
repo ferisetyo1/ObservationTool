@@ -6,6 +6,11 @@
         android:title="@string/menu_rekam"/>
 
     <item
+        android:id="@+id/nav_listkelas"
+        android:icon="@drawable/ic_list"
+        android:title="@string/menu_rekam"/>
+
+    <item
         android:id="@+id/nav_profil"
         android:icon="@drawable/ic_person_black"
         android:title="@string/menu_profil"/>

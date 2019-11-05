@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import feri.com.observationtool.R
+import feri.com.observationtool.main.fragment.MenuListKelasFragment
 import feri.com.observationtool.main.fragment.MenuProfilFragment
 import feri.com.observationtool.main.fragment.MenuRekamFragment
 
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.nav_rekam ->loadFragment(MenuRekamFragment())
+            R.id.nav_listkelas->loadFragment(MenuListKelasFragment())
             R.id.nav_profil -> loadFragment(MenuProfilFragment())
         }
         true
